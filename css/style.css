@@ -29,9 +29,9 @@ canvas {
 #str{
     font-size: 200px;
 }
-.scorin{
-    /* background-color: silver; */
-}
+/* .scorin{
+    /* background-color: silver; 
+} */
 .gameBlock{
     display: flex;
 }

@@ -37,6 +37,8 @@ function yourName(){
 
 let cage = 20; // размер клетки widthFieldData
 
+let reversal = [3,2,1,0];
+
 let widthFieldData = getComputedStyle(canvasData).width.replace(/[^+\d]/g, ''); // принимаем ширину поля с html
 let heightFieldData = getComputedStyle(canvasData).height.replace(/[^+\d]/g, '');
 
@@ -219,13 +221,14 @@ document.addEventListener('keydown', function(event) {
 
 
 function rundFigure (){
-
-    
+ 
+    console.log(tetramino[0])
     /* проверка есть ли фигура сейчас, если есть то сбрасываем перемещение */
     if (figureNow){
         for(let i=0; i<4; i++){
             figureNow[0][i] = figureNow[0][i]-biasSide;
             figureNow[1][i] = figureNow[1][i]-biasDown;
+            
         }
     }
 
@@ -256,9 +259,9 @@ function rundFigure (){
 
 function rotate(){
    
-    let reversal = [3,2,1,0];
-    fi = [...Array(2)].map(e => Array(4)); 
     tempo = [...Array(2)].map(e => Array(4)); 
+    fi = [...Array(2)].map(e => Array(4)); 
+    
     
     // tempo = figureNow
 
@@ -272,7 +275,7 @@ function rotate(){
         fi [1][i] = tempo[0][i]
         fi[0][i] = fi[0][i]+biasSide + 3;
         fi[1][i] = fi[1][i]+biasDown - 3;
-        console.log(fi)
+        // console.log(fi)
     }
     // выполнение поворота
     // for(let i=0; i<4; i++){
@@ -287,7 +290,7 @@ function rotate(){
 
 
     /*right*/////////////////////////////////
-    if(Math.max.apply(null, fi[0])<=numCageWidth-1 && Math.min.apply(null, fi[0])>=0){
+    if(Math.max.apply(null, fi[0])<=numCageWidth-1 && Math.min.apply(null, fi[0])>=0 ){
         figureNow = fi;
         outFigure (figureNow,ctx);
         difference = 0;
@@ -317,6 +320,10 @@ function rotate(){
         };
         // console.log(difference)
     };
+
+
+
+    
 
 
    
@@ -414,7 +421,7 @@ function chekMacY(){
    
     if(Math.max.apply(null, figureNow[1])<numCageHeight-1){
         
-        console.log(figureNow)
+        // console.log(figureNow)
         let chekDownSide = 0;
         
         // for(let i=0; i<2; i++){
