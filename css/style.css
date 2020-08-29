@@ -1,0 +1,41 @@
+
+*{
+    box-sizing: border-box;
+}
+
+.field{
+    width: 500px;
+    height: 500px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #ccc;
+
+}
+
+.excel{
+    /* width: 50px;
+    height: 50px; */
+    padding: 5px;
+
+}
+
+/* 
+canvas { 
+    
+    border: 1px solid black;  
+} */
+
+#str{
+    font-size: 200px;
+}
+.scorin{
+    /* background-color: silver; */
+}
+.gameBlock{
+    display: flex;
+}
+
+.input{
+    margin-bottom: 20px;
+}
