@@ -48,10 +48,13 @@ let numCageWidth = widthField / 20; // количество клеток по ш
 let numCageHeight = heightField / 20; // количество клеток по высоте
 
 let gameAccount = 0
-PlayingField = [...Array(numCageWidth)].map(e => Array(numCageHeight).fill(undefined));
+let PlayingField = [...Array(numCageWidth)].map(e => Array(numCageHeight).fill(undefined));
 let now; // текущая фигура 
-figureNow = [...Array(2)].map(e => Array(4).fill(undefined)); // создание масива 2х4
+let figureNow = [...Array(2)].map(e => Array(4).fill(undefined)); // создание масива 2х4
 // FillingPlayingField = [...Array(2)].map(e => Array(4).fill(undefined));
+
+let tempo = [...Array(2)].map(e => Array(4)); 
+let fi = [...Array(2)].map(e => Array(4)); 
 
 
 console.log(PlayingField)
@@ -108,13 +111,13 @@ let tetramino=[
 
 /* важные переменные *//////////
 function transToField (){
-    for(let j=0; j<2; j++){
+    // for(let j=0; j<2; j++){
         for(let i=0; i<4; i++){
             
             PlayingField [figureNow[0][i]][figureNow[1][i]]=1;
             // PlayingField [tetramino[0][0][i]][tetramino[0][1][i]]=tetramino[0][0][i]
         }
-    }
+    // }
     // console.log(PlayingField)
     gameOver()
     deleteBottomRow()
@@ -224,19 +227,20 @@ function rundFigure (){
  
     console.log(tetramino[0])
     /* проверка есть ли фигура сейчас, если есть то сбрасываем перемещение */
-    if (figureNow){
+    if (biasSide || biasDown){
         for(let i=0; i<4; i++){
-            figureNow[0][i] = figureNow[0][i]-biasSide;
-            figureNow[1][i] = figureNow[1][i]-biasDown;
+            figureNow[0][i] -= biasSide;
+            figureNow[1][i] -= biasDown;
             
         }
+        // tetramino[now]=figureNow.slice()
     }
 
     
 
-    if (now != undefined){
+    if (now !== undefined){
         outFigure (tetramino[now],ctx)
-        figureNow = tetramino[now];
+        figureNow = tetramino[now].slice();
         let rund = Math.floor(Math.random() * 7);
         now = rund;
         outFigure (tetramino[now],dataWindow)
@@ -263,35 +267,25 @@ function rotate(){
     fi = [...Array(2)].map(e => Array(4)); 
     
     
-    // tempo = figureNow
+    tempo = figureNow
 
 
     
     // забрать разницу передвижений
     for(let i=0; i<4; i++){
-        tempo[0][i] = figureNow[0][i]-biasSide - 3;
-        tempo[1][i] = figureNow[1][i]-biasDown + 3;
-        fi [0][i] = reversal[tempo[1][i]]; //ревёрсит У и пишет его в Х
-        fi [1][i] = tempo[0][i]
+        tempo[0][i] = figureNow.slice()[0][i]-biasSide;
+        tempo[1][i] = figureNow.slice()[1][i]-biasDown;
+        fi [0][i] = reversal[tempo[1][i]+3]; //ревёрсит У и пишет его в Х
+        fi [1][i] = tempo[0][i]-3
         fi[0][i] = fi[0][i]+biasSide + 3;
         fi[1][i] = fi[1][i]+biasDown - 3;
         // console.log(fi)
     }
-    // выполнение поворота
-    // for(let i=0; i<4; i++){
-    //     fi [0][i] = reversal[tempo[1][i]]; //ревёрсит У и пишет его в Х
-    //     fi [1][i] = tempo[0][i]
-    // }
-    // // вернуть разницу передвижений
-    // for(let i=0; i<4; i++){
-    //     fi[0][i] = fi[0][i]+biasSide + 3;
-    //     fi[1][i] = fi[1][i]+biasDown - 3;
-    // }
-
+    
 
     /*right*/////////////////////////////////
     if(Math.max.apply(null, fi[0])<=numCageWidth-1 && Math.min.apply(null, fi[0])>=0 ){
-        figureNow = fi;
+        figureNow = fi.slice();
         outFigure (figureNow,ctx);
         difference = 0;
         // console.log("inside")
@@ -321,13 +315,6 @@ function rotate(){
         // console.log(difference)
     };
 
-
-
-    
-
-
-   
-   
 }
 
 
@@ -377,12 +364,9 @@ function stepLeft (){
         }
     }
 
-    if (chekLeftSide == 1){
+    if (chekLeftSide != 1){
         // transToField ();
         // rundFigure ();  
-    }else{
-
-
         if(Math.min.apply(null, figureNow[0])>0){
             for(let i=0; i<4; i++){
                 figureNow[0][i] = figureNow[0][i]-1+difference;
