@@ -18,22 +18,17 @@ let gameScoringWindow = document.getElementById("scoringWindow").getContext("2d"
 let testW = document.getElementById("TestWindow").getContext("2d");
 
 var fps = 1;
-function step() {  
-
+function step() { 
     if (figureNow[0][0] !== undefined){
         setTimeout(function() {
-        
                 requestAnimationFrame(step);
-            // requestAnimationFrame(step);
             chekMacY()
-            // console.log(figureNow)
         }, 1000 / fps);
     }
-
 }
+
 let name;
 function yourName(){
-    
         if (document.getElementById("elem1").value){
             name = document.getElementById("elem1").value;
             rundFigure ();
@@ -45,8 +40,6 @@ function yourName(){
         }else{
             console.log("enter your name")
         }
-        
-
 }
 
 
@@ -90,10 +83,8 @@ function makeDataWindow(){
             dataWindow.fillRect(j*cage + 0.05 * cage, i*cage + 0.05 * cage, 0.9 * cage, 0.9 * cage);
             dataWindow.clearRect(j*cage + 0.15 * cage, i*cage + 0.15 * cage, 0.7 * cage, 0.7 * cage);
             dataWindow.fillRect(j*cage + 0.2 * cage, i*cage + 0.2 * cage, 0.6 * cage, 0.6 * cage);
-        
         }
     }
-
 }
 
 // gameScoringWindow.strokeRect(0,0,widthFieldData, heightFieldData);
@@ -203,9 +194,9 @@ function drawPlayingField(){
 
 /* очищает поле */
 function flesh(i){
-    // i.fillStyle = "white";
-    // i.fillRect(0,0, widthField, heightField);
-    // i.fillStyle = "black";
+    i.fillStyle = "white";
+    i.fillRect(0,0, widthField, heightField);
+    i.fillStyle = "black";
 }
 
 
