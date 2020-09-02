@@ -8,27 +8,42 @@
 	</head>
 	<body>
         
-        <div>
-            
-            <form class="input">
-                <input id="elem1" type="text" name="quantity" placeholder="ваше имя:">
-                <input onclick="yourName()" id="butt" type="button" value="Start"/>
-             
-            </form>
-
-           <div id="it"></div>
-            
-            <div id="str"></div>
-            
-            <div class="gameBlock">
-                <canvas width="200" height="400" id="canvas"></canvas>
-                <div class="scorin">
-                    <canvas width="100" height="100" id="canvasData"></canvas>
-                    <canvas width="100" height="100" id="scoringWindow"></canvas>
+        <div id="StartHeadline">
+            <div class="start">
+                <form id="input">
+                    <input id="elem1" type="text" name="quantity" placeholder="ваше имя:">
+                    <input onclick="yourName()" id="butt" type="button" value="Start"/>
+                    <div id="radio">
+                        <input id="rad" type="radio" name="browser" value="200"> mini
+                        <input id="rad" type="radio" name="browser" value="400"> standart
+                        <input id="rad" type="radio" name="browser" value="600"> big
+                    </div>
+                </form>
+                <div class="heading">
+                    <h1 class="hTetris">TETRIS</h1>
+                    <div>
+                        <p class="pOne">ONE 
+                            <samp class="sGroup">
+                                <samp class="fSamp">PERSONE</samp>
+                                <samp>GAME</samp>
+                            </samp>
+                        </p>
+                    </div>
+                    
                 </div>
             </div>
-                
         </div>
+            
+        <div id="gameBlock">
+            <canvas width="200" height="400" id="Field"></canvas>
+             <div class="scorin">
+                 <canvas width="100" height="200" id="scoringWindow"></canvas>
+                 <canvas width="100" height="100" id="canvasData"></canvas>
+                 
+                 <canvas width="100" height="100" id="TestWindow"></canvas>
+             </div>
+             
+         </div>
 
 
 

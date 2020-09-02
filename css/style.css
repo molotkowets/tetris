@@ -1,8 +1,16 @@
+@font-face {
+    font-family: "DS Crystal"; /* Гарнитура шрифта */
+    src: url(../font/cristal.TTF); /* Путь к файлу со шрифтом */
+   }
 
 *{
     box-sizing: border-box;
+    
 }
-
+body{
+    background: url(/img/background.jpg);
+    margin: 0;
+}
 .field{
     width: 500px;
     height: 500px;
@@ -19,6 +27,20 @@
     padding: 5px;
 
 }
+#elem1{
+    background: none;
+    color: white;
+}
+#butt{
+    background: none;
+    color: white;
+}
+
+#radio{
+    color: #767676;
+
+}
+
 
 /* 
 canvas { 
@@ -32,10 +54,61 @@ canvas {
 /* .scorin{
     /* background-color: silver; 
 } */
-.gameBlock{
+#gameBlock{
+    width: 310px;
+    display: none;
     display: flex;
+    background: #fff;
 }
 
-.input{
-    margin-bottom: 20px;
+#input{
+    display: block;
+    text-align: center;
+    color: white;
+}
+.scorin{
+    display: grid;
+    font: DS Crystal; 
+    margin-left: 5px;
+}
+#Field{
+     
+    background-color: #fff;
+}
+.start{
+    color: white;
+    width: 500px;
+    align-self: center;
+}
+.sGroup{
+    display: grid;
+   font-size: 36px;
+   margin-left: 10px;
+   
+}
+.fSamp{
+    margin: 15px 0px -24px 0;
+    
+}
+.pOne{
+    display: flex;
+    font-size: 80px;
+    font-family: calibri Light;
+    font-style: italic;
+    margin: 0;
+    justify-content: center;
+}
+.hTetris{
+    font-size: 120px;
+    font-family: tahoma;
+    margin: 0;
+    
+}
+.heading{
+    display: grid;
+    justify-content: center;
+}
+#StartHeadline{
+    display: grid;
+    height: 100vh;
 }

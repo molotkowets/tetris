@@ -1,6 +1,21 @@
-let ctx = document.getElementById("canvas").getContext("2d"); 
+
+// let createCan = document.createElement("canvas");
+// createCan.id = 'Field'
+// document.getElementById("Field").style.width="400px"
+// document.getElementById("Field").style.width="400px"
+
+// let conectDiv = document.getElementById("gameBlock");
+// let divTest = document.createElement("canvas");
+// conectDiv.appendChild(divTest)
+// divTest.id = 'Field'
+// let diy = document.getElementById("Field");
+// diy.style.width = "200px";
+// diy.style.height = "400px";
+
+let ctx = document.getElementById("Field").getContext("2d"); 
 let dataWindow = document.getElementById("canvasData").getContext("2d");
 let gameScoringWindow = document.getElementById("scoringWindow").getContext("2d");
+let testW = document.getElementById("TestWindow").getContext("2d");
 
 var fps = 1;
 function step() {  
@@ -18,13 +33,15 @@ function step() {
 }
 let name;
 function yourName(){
-        // document.getElementById("it").innerHTML = document.getElementById("elem1").value
-
+    
         if (document.getElementById("elem1").value){
             name = document.getElementById("elem1").value;
             rundFigure ();
             rundFigure ();
             step(figureNow);
+            document.getElementById("StartHeadline").remove();
+            document.getElementById("gameBlock").style = "display: flex";
+            gameScoring(0)
         }else{
             console.log("enter your name")
         }
@@ -42,8 +59,8 @@ let reversal = [3,2,1,0];
 let widthFieldData = getComputedStyle(canvasData).width.replace(/[^+\d]/g, ''); // принимаем ширину поля с html
 let heightFieldData = getComputedStyle(canvasData).height.replace(/[^+\d]/g, '');
 
-let widthField = getComputedStyle(canvas).width.replace(/[^+\d]/g, ''); // принимаем ширину поля с html
-let heightField = getComputedStyle(canvas).height.replace(/[^+\d]/g, ''); // принимаем высоту поля с html
+let widthField = getComputedStyle(Field).width.replace(/[^+\d]/g, ''); // принимаем ширину поля с html
+let heightField = getComputedStyle(Field).height.replace(/[^+\d]/g, ''); // принимаем высоту поля с html
 let numCageWidth = widthField / 20; // количество клеток по шиине
 let numCageHeight = heightField / 20; // количество клеток по высоте
 
@@ -57,17 +74,30 @@ let tempo = [...Array(2)].map(e => Array(4));
 let fi = [...Array(2)].map(e => Array(4)); 
 
 
-console.log(PlayingField)
-
-
 let biasDown = 0;
 let biasSide = 0;
 let difference = 0;
 
-dataWindow.strokeRect(0,0,widthFieldData, heightFieldData);
-flesh(dataWindow);
-gameScoringWindow.strokeRect(0,0,widthFieldData, heightFieldData);
-flesh(gameScoringWindow);
+
+
+
+function makeDataWindow(){
+    // dataWindow.strokeRect(0,0,widthFieldData, heightFieldData);
+
+    for (let i=0; i<4; i++){
+        for (let j=0; j<4; j++){
+            dataWindow.fillStyle = "#ccc";
+            dataWindow.fillRect(j*cage + 0.05 * cage, i*cage + 0.05 * cage, 0.9 * cage, 0.9 * cage);
+            dataWindow.clearRect(j*cage + 0.15 * cage, i*cage + 0.15 * cage, 0.7 * cage, 0.7 * cage);
+            dataWindow.fillRect(j*cage + 0.2 * cage, i*cage + 0.2 * cage, 0.6 * cage, 0.6 * cage);
+        
+        }
+    }
+
+}
+
+// gameScoringWindow.strokeRect(0,0,widthFieldData, heightFieldData);
+// flesh(gameScoringWindow);
 
 function animation(n){
     if (n[0][0] !== undefined){
@@ -102,14 +132,14 @@ let tetramino=[
         [3,4,4,5], // X
         [-2,-2,-1,-1]  // Y
     ],
-    tetraminoS = [
-        [4,4,3,5], // X
-        [-3,-2,-1,-1]  // Y
-    ]
     // tetraminoS = [
-    //     [4,5,3,4], // X
-    //     [-2,-2,-1,-1]  // Y
+    //     [4,4,3,5], // X
+    //     [-3,-2,-1,-1]  // Y
     // ]
+    tetraminoS = [
+        [4,5,3,4], // X
+        [-2,-2,-1,-1]  // Y
+    ]
 ];
 /* фигуры */
 
@@ -136,8 +166,13 @@ function drawFillingPlayingField(){
             let x = i*cage;
             
             if (PlayingField[i][j] !== undefined){
+                ctx.fillStyle = "black";
+                ctx.fillRect(i*cage + 0.05 * cage, j*cage + 0.05 * cage, 0.9 * cage, 0.9 * cage);
+                ctx.clearRect(i*cage + 0.15 * cage, j*cage + 0.15 * cage, 0.7 * cage, 0.7 * cage);
+                ctx.fillRect(i*cage + 0.20 * cage, j*cage + 0.2 * cage, 0.6 * cage, 0.6 * cage);
 
-                ctx.fillRect(i*cage,j*cage,cage,cage);
+
+                // ctx.fillRect(i*cage,j*cage,cage,cage);
             }
            
         }
@@ -152,7 +187,14 @@ function drawPlayingField(){
         let y = j*cage;
         for (let i = 0; i<numCageWidth; i++){
             let x = i*cage;
-            ctx.strokeRect(x,y,cage,cage);
+            // ctx.strokeRect(x,y,cage,cage);
+            ctx.fillStyle = "#ccc";
+
+            ctx.fillRect(x + 0.05 * cage, y + 0.05 * cage, 0.9 * cage, 0.9 * cage);
+            ctx.clearRect(x + 0.15 * cage, y + 0.15 * cage, 0.7 * cage, 0.7 * cage);
+            ctx.fillRect(x + 0.20 * cage, y + 0.2 * cage, 0.6 * cage, 0.6 * cage);
+
+
         }
     }
 }
@@ -161,9 +203,9 @@ function drawPlayingField(){
 
 /* очищает поле */
 function flesh(i){
-    i.fillStyle = "white";
-    i.fillRect(0,0, widthField, heightField);
-    i.fillStyle = "black";
+    // i.fillStyle = "white";
+    // i.fillRect(0,0, widthField, heightField);
+    // i.fillStyle = "black";
 }
 
 
@@ -180,10 +222,16 @@ function outFigure (xy,w){
     if(w == dataWindow){
         dataY = dataY + 3;
         dataX = dataX - 3;
+        makeDataWindow()
     }
     for( let i=0; i<=3; i++){
-        
-        w.fillRect(cage*(xy[0][i] + dataX),cage*(xy[1][i] + dataY), cage, cage);
+        w.fillStyle = "black";
+        w.fillRect(cage*(xy[0][i] + dataX) + 0.05 * cage, cage*(xy[1][i] + dataY) + 0.05 * cage, 0.9 * cage, 0.9 * cage);
+        w.clearRect(cage*(xy[0][i] + dataX) + 0.15 * cage, cage*(xy[1][i] + dataY) + 0.15 * cage, 0.7 * cage, 0.7 * cage);
+        w.fillRect(cage*(xy[0][i] + dataX) + 0.20 * cage, cage*(xy[1][i] + dataY) + 0.2 * cage, 0.6 * cage, 0.6 * cage);
+
+
+        // w.fillRect(cage*(xy[0][i] + dataX),cage*(xy[1][i] + dataY), cage, cage);
     }
     
 }
@@ -257,7 +305,7 @@ function rundFigure (){
     }
    
     
-    dataWindow.strokeRect(0,0,widthFieldData, heightFieldData); //обновляется поле 
+  
     biasSide = 0;
     biasDown = 0;
     difference = 0;
@@ -453,7 +501,7 @@ function deleteBottomRow(){
             if(PlayingField[x][y]){
                 testing = testing + 1
             
-                if(testing == 10){
+                if(testing == numCageWidth){
                     deleteRowStepDown(y);
                     
                 }
@@ -477,12 +525,23 @@ function deleteRowStepDown(row){
 }
 
 function gameScoring(text) {
+    gameScoringWindow.font = " 18px DS Crystal";
+
+    let zero = "0";
+    for(let i=0; i<5-String(text).length; i++){
+        zero += "0"  
+    }
+
     flesh(gameScoringWindow);
+
     gameScoringWindow.fillStyle = "black";
-    gameScoringWindow.strokeRect(0,0,widthFieldData, heightFieldData);
-    gameScoringWindow.font = "24px ";
-    gameScoringWindow.fillText( "Ваше имя: " + name, 10, 20);
-    gameScoringWindow.fillText( "твой счет: " + text, 10, 35);
+    gameScoringWindow.fillText( "Your name is " , 0, 20);
+    gameScoringWindow.fillText(  name, 0, 40);
+    gameScoringWindow.fillText( "SCORE: " , 0, 60);
+    gameScoringWindow.fillText( zero + text, 0, 80);
+    gameScoringWindow.fillText( "HI-SCORE: ", 0, 110);
+    gameScoringWindow.fillText( zero + text, 0, 130);
+    
   }
 
   let fullPlayingField = 0;
@@ -495,3 +554,31 @@ function gameScoring(text) {
         }
     }
   }
+
+
+
+
+
+
+
+
+
+
+//   
+//   testW.clearRect(1, 1, 16, 16);
+//   testW.strokeRect(0, 0, 40, 40);
+ 
+// for (let i=0; i<4; i++){
+//     for (let j=0; j<4; j++){
+//         testW.fillStyle = "#ccc";
+//         testW.fillRect(j*cage, i*cage, 0.9 * cage, 0.9 * cage);
+//         testW.clearRect(j*cage + 0.1 * cage, i*cage + 0.1 * cage, 0.7 * cage, 0.7 * cage);
+//         testW.fillRect(j*cage + 0.15 * cage, i*cage + 0.15 * cage, 0.6 * cage, 0.6 * cage);
+    
+//         // testW.fillStyle = "#999";
+//     }
+// }
+// testW.fillRect(0, 0, 18, 18);
+// testW.clearRect(2, 2, 14, 14);
+// testW.fillRect(3, 3, 12, 12);
+//   testW.strokeRect(10, 10, 20, 20);
