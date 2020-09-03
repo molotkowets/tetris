@@ -31,6 +31,7 @@ let name;
 function yourName(){
         if (document.getElementById("elem1").value){
             name = document.getElementById("elem1").value;
+            document.body.style = "background: url(/img/background-play.png)";
             rundFigure ();
             rundFigure ();
             step(figureNow);
