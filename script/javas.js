@@ -1,9 +1,7 @@
-
 // let createCan = document.createElement("canvas");
 // createCan.id = 'Field'
 // document.getElementById("Field").style.width="400px"
 // document.getElementById("Field").style.width="400px"
-
 // let conectDiv = document.getElementById("gameBlock");
 // let divTest = document.createElement("canvas");
 // conectDiv.appendChild(divTest)
@@ -31,7 +29,7 @@ let name;
 function yourName(){
         if (document.getElementById("elem1").value){
             name = document.getElementById("elem1").value;
-            document.body.style = "background: url(/img/background-play.png)";
+            document.body.style = "background: url(/img/background-playeng.png)";
             rundFigure ();
             rundFigure ();
             step(figureNow);

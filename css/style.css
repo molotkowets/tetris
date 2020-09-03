@@ -55,10 +55,11 @@ canvas {
     /* background-color: silver; 
 } */
 #gameBlock{
-    width: 310px;
-    display: none;
+        display: none;
     display: flex;
-    background: #fff;
+    width: 100%;
+    justify-content: center;
+    
 }
 
 #input{
@@ -70,6 +71,7 @@ canvas {
     display: grid;
     font: DS Crystal; 
     margin-left: 5px;
+    background: #fff;
 }
 #Field{
      
